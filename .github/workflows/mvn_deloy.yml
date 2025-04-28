@@ -40,4 +40,4 @@ jobs:
           
           # Step 4: 构建并发布到 Maven 私有仓库
       - name: Build and Deploy to Maven
-        run: mvn clean deploy -Pui-package
+        run: mvn clean deploy
