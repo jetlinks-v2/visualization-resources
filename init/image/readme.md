@@ -2,7 +2,7 @@
 
 
 ## 对应实体配置
-例如文件：image/demo.png
+例如文件：image/xxx/demo.png
   
 ```json
 {
@@ -11,13 +11,10 @@
   "name": "xx",
   "group": "xxxx",
   "version": 0,
-  "provider": "local",
-  "type": {
-    "text": "图片",
-    "value": "image"
-  },
+  "provider": "system",
+  "type": "image",
   "configuration": {
-    "name": "demo.png"
+    "name": "xxx/demo.png"
   },
   "i18nMessages": {
     "name": {
