@@ -11,7 +11,7 @@
   "name": "xx",
   "group": "xxxx",
   "version": 0,
-  "provider": "local",
+  "provider": "system",
   "type": "model",
   "configuration": {
     "name": "demo.obj"
