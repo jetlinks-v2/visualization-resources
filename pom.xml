@@ -52,7 +52,18 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
+                <excludes>
+                    <exclude>thumbnail/*</exclude>
+                </excludes>
                 <targetPath>vis/${project.artifactId}</targetPath>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>init</directory>
+                <includes>
+                    <include>thumbnail/*</include>
+                </includes>
+                <targetPath>ui/vis/${project.artifactId}</targetPath>
                 <filtering>false</filtering>
             </resource>
         </resources>
