@@ -1,0 +1,14 @@
+[
+  {
+    "id": "template_component_init",
+    "name": "内置模版"
+  },
+  {
+    "id": "system_component_line_chart",
+    "name": "折线图"
+  },
+  {
+    "id": "system_component_bar_chart",
+    "name": "柱状图"
+  }
+]

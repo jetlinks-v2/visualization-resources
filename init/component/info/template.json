@@ -1,0 +1,186 @@
+[
+  {
+    "id": "c95b3e281add429eac8a08abf411f5e0",
+    "resourceId": "component_1745569913777",
+    "name": "报警情况",
+    "version": 0,
+    "thumbnailUrl": "报警情况.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n    },\n    {\n      label: 'xx',\n      value: [820, 932, 901, 934, 1290, 1330, 1320]\n    }\n  ]\n\n  let chartData = [\n    {\n      label: 'normal',\n      value: 1\n    },\n    {\n      label: 'abnormal',\n      value: 3\n    }\n  ];\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    series: [\n      {\n        type: 'pie',\n        startAngle: 90,\n        center: ['50%', '45%'], // 中心定位\n        radius: ['60%', '70%'], // 环形尺寸\n        hoverAnimation: false, // 禁用交互动画\n        label: { show: false }, // 隐藏数据标签\n        data: [\n          {\n            value: chartData[0].value,\n            itemStyle: {\n              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [\n                { offset: 0, color: '#f9c76d' },\n                { offset: 1, color: '#fb6c36' }\n              ])\n            }\n          },\n          {\n            value: chartData[1].value,\n            itemStyle: {\n              color: '#010f12'\n            }\n          }\n        ]\n      }\n    ]\n  };\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745569968108,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745569968109,
+    "i18nName": "报警情况"
+  },
+  {
+    "id": "f6950280e464dc2a68b47b08268e9201",
+    "resourceId": "component_1745575382985",
+    "name": "仓储情况",
+    "version": 0,
+    "thumbnailUrl": "仓储情况.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: [90, 80, 70, 65, 60]\n    },\n    {\n      label: 'time',\n      value: ['2m30s', '5m30s', '7m30s', '8m30s', '10m30s']\n    },\n    {\n      label: 'xx',\n      value: ['入库', '备货', '出库', '回库', '校验']\n    }\n  ];\n\n\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    grid: {\n      left: '20%',\n      right: '15%',\n      bottom: '10%',\n      containLabel: true\n    },\n    yAxis: {\n      inverse: true,\n      show: false,\n      type: 'category',\n      data: data[1].value,\n      axisLabel: {\n        color: '#fff',\n        fontSize: 14,\n        margin: 20 // 调整标签间距\n      },\n      axisLine: { show: false },\n      axisTick: { show: false }\n    },\n    xAxis: {\n      type: 'value',\n      max: 100,\n      axisLabel: { show: false },\n      axisLine: { show: false },\n      splitLine: { show: false }\n    },\n    series: [\n      {\n        type: 'bar',\n        barGap: '-100%',\n        barWidth: 10,\n        itemStyle: {\n          color: 'rgba(255,255,255,0.1)'\n        },\n        label: {\n          show: true,\n          position: ['92%', '-200%'],\n          color: '#fff',\n          fontSize: 14,\n          formatter: ({ dataIndex }) => data[1].value[dataIndex]\n        },\n        data: Array(data[0].value.length).fill(100) // 全长度背景\n      },\n      // 进度条（渐变蓝）\n      {\n        type: 'bar',\n        barWidth: 10,\n        label: {\n          show: true,\n          position: ['0.5%', '-200%'],\n          color: '#89a2a7',\n          fontSize: 14,\n          formatter: ({ dataIndex }) => `No.${dataIndex + 1}` + '\\t\\t\\t' + data[2].value[dataIndex]\n        },\n        itemStyle: {\n          color: (params) =>\n            new echarts.graphic.LinearGradient(0, 0, 1, 0, [\n              { offset: 0, color: '#263f44' }, // 左侧亮蓝\n              { offset: 1, color: '#3bf7e9' } // 右侧深蓝\n            ])\n        },\n        data: data[0].value,\n        // 新增标记线配置\n      },\n      {\n        symbol: 'image://data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzQiIGhlaWdodD0iNDIiIHZpZXdCb3g9IjAgMCAzNCA0MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZGRkZF81NjFfNTAxNzQpIj4KPHBhdGggZD0iTTE1IDE1SDE5TDE1IDI3VjE1WiIgZmlsbD0idXJsKCNwYWludDBfbGluZWFyXzU2MV81MDE3NCkiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2RkZGRfNTYxXzUwMTc0IiB4PSIwLjMiIHk9IjAuMyIgd2lkdGg9IjMzLjQiIGhlaWdodD0iNDEuNCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVDb2xvck1hdHJpeCBpbj0iU291cmNlQWxwaGEiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIgcmVzdWx0PSJoYXJkQWxwaGEiLz4KPGZlT2Zmc2V0Lz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNy4zNSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDEgMCAwIDAgMCAwLjk0MTE3NiAwIDAgMCAxIDAiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJlZmZlY3QxX2Ryb3BTaGFkb3dfNTYxXzUwMTc0Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI3LjM1Ii8+CjxmZUNvbXBvc2l0ZSBpbjI9ImhhcmRBbHBoYSIgb3BlcmF0b3I9Im91dCIvPgo8ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMSAwIDAgMCAwIDAuOTQxMTc2IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iZWZmZWN0MV9kcm9wU2hhZG93XzU2MV81MDE3NCIgcmVzdWx0PSJlZmZlY3QyX2Ryb3BTaGFkb3dfNTYxXzUwMTc0Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI3LjM1Ii8+CjxmZUNvbXBvc2l0ZSBpbjI9ImhhcmRBbHBoYSIgb3BlcmF0b3I9Im91dCIvPgo8ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMSAwIDAgMCAwIDAuOTQxMTc2IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iZWZmZWN0Ml9kcm9wU2hhZG93XzU2MV81MDE3NCIgcmVzdWx0PSJlZmZlY3QzX2Ryb3BTaGFkb3dfNTYxXzUwMTc0Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzLjY1Ii8+CjxmZUNvbXBvc2l0ZSBpbjI9ImhhcmRBbHBoYSIgb3BlcmF0b3I9Im91dCIvPgo8ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMSAwIDAgMCAwIDAuOTQxMTc2IDAgMCAwIDAuNjYgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iZWZmZWN0M19kcm9wU2hhZG93XzU2MV81MDE3NCIgcmVzdWx0PSJlZmZlY3Q0X2Ryb3BTaGFkb3dfNTYxXzUwMTc0Ii8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iZWZmZWN0NF9kcm9wU2hhZG93XzU2MV81MDE3NCIgcmVzdWx0PSJzaGFwZSIvPgo8L2ZpbHRlcj4KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzU2MV81MDE3NCIgeDE9IjE3IiB5MT0iMTUiIHgyPSIxNyIgeTI9IjI3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNFN0ZGRjgiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRTdGRkY4IiBzdG9wLW9wYWNpdHk9IjAuNTYiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K',\n        type: 'pictorialBar',\n        tooltip: {\n          show: false // 禁用 pictorialBar 系列的 tooltip\n        },\n        itemStyle: {\n          color: '#fff'\n        },\n        symbolPosition: 'end',\n        symbolSize: [48, 70],\n        symbolOffset: [27, 0],\n        data: data[0].value\n      }\n    ],\n    grid: {\n      left: 50,\n      right: 100,\n      top: 40,\n      bottom: 0\n    }\n  };\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745575613994,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745575811339,
+    "i18nName": "仓储情况"
+  },
+  {
+    "id": "8cf7693a4681fb95a9cbe1e0a7b4d7b5",
+    "resourceId": "component_1745577158858",
+    "name": "库区任务",
+    "version": 0,
+    "thumbnailUrl": "库区任务.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n    },\n    {\n      label: 'xx',\n      value: [820, 932, 901, 934, 1290, 1330, 1320]\n    }\n  ]\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    tooltip: {\n      trigger: 'axis',\n      axisPointer: {\n        type: 'none'\n      },\n      formatter: function (params) {\n        return params[0].name + ': ' + params[0].value;\n      }\n    },\n    xAxis: {\n      data: ['A区', 'B区', 'C区', 'D区', 'E区', 'F区', 'G区'],\n      axisTick: { show: false },\n      axisLine: { show: false },\n      axisLabel: {\n        color: '#869fa4',\n        type: 'dashed'\n      }\n    },\n    yAxis: {\n      type: 'value',\n      name: '单位：个',\n      nameLocation: 'end', // 名称显示在轴线末端\n      nameTextStyle: {\n        color: '#adb2b8', // 与坐标轴标签同色\n        fontSize: 12,\n        padding: [0, 0, 0, -10] // 微调位置 [上, 右, 下, 左]\n      },\n      axisTick: { show: false },\n      axisLine: { show: false },\n      axisLabel: {\n        color: '#869fa4'\n      },\n      splitLine: { lineStyle: { color: '#6d8488', type: 'dashed' } }\n    },\n    color: ['#5beae1'],\n    series: [\n      {\n        name: 'hill',\n        type: 'pictorialBar',\n        barCategoryGap: '-130%',\n        // symbol: 'path://M0,10 L10,10 L5,0 L0,10 z',\n        symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',\n        itemStyle: {\n          color: (params) =>\n            new echarts.graphic.LinearGradient(0, 0, 0, 1, [\n              { offset: 0, color: '#263f44' }, // 左侧亮蓝\n              { offset: 1, color: '#3bf7e9' } // 右侧深蓝\n            ]),\n          opacity: 0.3\n        },\n        emphasis: {\n          itemStyle: {\n            opacity: 1\n          }\n        },\n        data: [123, 60, 25, 18, 12, 9, 2],\n        z: 10\n      }\n    ],\n    grid: {\n      left: 60,\n      right: 100,\n      top: 50,\n      bottom: 30\n    }\n  };\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745577205217,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745577266549,
+    "i18nName": "库区任务"
+  },
+  {
+    "id": "32fd8ddfb29a504b4af568c70e655b0a",
+    "resourceId": "component_1745565579205",
+    "name": "库存分类",
+    "version": 0,
+    "thumbnailUrl": "库存分类占比.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  const total = 1230; // 库存总量\n  let data = []\n  let pieData = [\n    {\n      name: '信息',\n      value: 300,\n      color: '#3dbcbe',\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(\n          0,\n          0,\n          1,\n          1, // 渐变方向：从左到右\n          [\n            { offset: 0, color: '#43d7d7' }, // 左侧亮青色\n            { offset: 1, color: '#101412' } // 右侧深蓝色\n          ]\n        )\n      }\n    },\n    {\n      name: '医疗',\n      value: 300,\n      color: '#fcbc5b',\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(1, 1, 0, 1, [\n          { offset: 0, color: '#fcbc5b' }, // 浅橙色\n          { offset: 1, color: '#101412' } // 深橙色\n        ])\n      }\n    },\n    // 训练（浅蓝色渐变）\n    {\n      value: 250,\n      name: '训练',\n      color: '#87CEEB',\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [\n          { offset: 0, color: '#020e11' }, // 天蓝色\n          { offset: 1, color: '#bae0f6' } // 道奇蓝\n        ])\n      }\n    },\n    // 检验（蓝色渐变）\n    {\n      value: 150,\n      name: '检验',\n      color: '#4169E1',\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(1, 0, 1, 1, [\n          { offset: 1, color: '#2380ef' }, // 皇家蓝\n          { offset: 0, color: '#101412' } // 海军蓝\n        ])\n      }\n    },\n    // 其他（灰色渐变）\n    {\n      value: 100,\n      name: '其他',\n      color: '#f57f28',\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(1, 0, 0, 1, [\n          { offset: 0, color: '#101412' }, // 浅灰\n          { offset: 1, color: '#f57f28' } // 深灰\n        ])\n      }\n    }\n  ];\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    series: [\n      {\n        type: 'pie',\n        radius: ['30%', '40%'],\n        center: ['25%', '47%'],\n        label: {\n          show: false\n        },\n        data: pieData.map((item) => ({\n          value: item.value,\n          name: item.name,\n          itemStyle: item.itemStyle\n        }))\n      }\n    ],\n    graphic: [\n      // 动态生成分类列表\n      ...pieData.map((item, index) => ({\n        type: 'group',\n        right: '15%',\n        top: `${25 + index * 10}%`, // 每行间隔8%\n        children: [\n          {\n            // 分类前小矩形\n            type: 'rect',\n            left: -20, // 相对父级偏移量\n            top: '25%',\n            shape: {\n              width: 12,\n              height: 12\n            },\n            style: {\n              fill: item.color // 继承数据颜色\n            }\n          },\n          {\n            // 分类名称\n            type: 'text',\n            style: {\n              text: item.name,\n              fill: '#789094',\n              fontSize: 14\n            }\n          },\n          {\n            // 百分比\n            type: 'text',\n            left: 80,\n            style: {\n              text: `${Math.round((item.value / total) * 100)}%`,\n              fill: '#ddf5fa',\n              fontSize: 14\n            }\n          },\n          {\n            // 数量\n            type: 'text',\n            left: 160,\n            style: {\n              text: item.value,\n              fill: '#999',\n              fontSize: 14\n            }\n          }\n        ]\n      }))\n    ]\n  };\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745565754988,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745566305307,
+    "i18nName": "库存分类"
+  },
+  {
+    "id": "9c94bcd0e618a388d6b2db1be9e8cbf7",
+    "resourceId": "component_1745567274239",
+    "name": "出入库统",
+    "version": 0,
+    "thumbnailUrl": "出入库统.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n    },\n    {\n      label: 'xx',\n      value: [820, 932, 901, 934, 1290, 1330, 1320]\n    }\n  ]\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n\n    tooltip: {\n      trigger: 'axis',\n      axisPointer: { // 指示线样式强化\n        lineStyle: {\n          color: '#adb2b8',\n          width: 1.5\n        }\n      },\n      backgroundColor: 'rgba(255, 255, 255, 0.08)', // 更透明\n      // 使用阴影模拟毛玻璃边缘光晕\n      extraCssText: `\n    backdrop-filter: blur(18px);\n    box-shadow: 0 4px 20px rgba(0,0,0,0.15);\n    border-radius: 8px;`,\n      formatter: (params) => `\n                    <div style=\"padding:10px;border-radius:4px\">\n                        <div>${params[0].name}</div>\n                        ${params\n          .map(\n            (item) => `\n                            <div style=\"color:#b8d1d6\">\n                            <span style=\"color:${item.color}\">■</span>\n                                ${item.seriesName}      ${item.value}个\n                            </div>\n                        `\n          )\n          .join('')}\n                    </div>\n                `\n\n    },\n    xAxis: {\n      type: 'category',\n      data: [\n        '1月',\n        '2月',\n        '3月',\n        '4月',\n        '5月',\n        '6月',\n        '7月',\n        '8月',\n        '9月',\n        '10月',\n        '11月',\n        '12月'\n      ],\n      axisLabel: {\n        color: '#6d8488',\n        interval: 0\n      },\n      axisLine: { lineStyle: { color: '#6d8488' } },\n      axisTick: { show: false }\n    },\n    yAxis: {\n      type: 'value',\n      name: '单位：个',\n      nameLocation: 'end', // 名称显示在轴线末端\n      nameTextStyle: {\n        color: '#adb2b8', // 与坐标轴标签同色\n        fontSize: 12,\n        padding: [0, 0, 0, -30] // 微调位置 [上, 右, 下, 左]\n      },\n      max: 1000,\n      interval: 250,\n      axisLabel: { color: '#6d8488' },\n      splitLine: { lineStyle: { color: '#6d8488', type: 'dashed' } }\n    },\n    series: [\n      {\n        // 出库线\n        name: '出库',\n        type: 'line',\n        data: [200, 300, 450, 380, 520, 480, 600, 550, 700, 650, 800, 900],\n        symbol: 'none',\n        symbolSize: 8,\n        itemStyle: { color: '#00C853' },\n        lineStyle: { width: 2 },\n        label: {\n          show: true,\n          position: 'top',\n          formatter: ({ dataIndex, value }) =>\n            dataIndex === 5 ? `${value}` : '',\n          color: '#00C853'\n        }\n      },\n      {\n        // 入库线\n        name: '入库',\n        type: 'line',\n        data: [150, 280, 380, 300, 400, 320, 480, 420, 600, 550, 700, 800],\n        symbol: 'none',\n        symbolSize: 8,\n        itemStyle: { color: '#1890FF' },\n        lineStyle: { width: 2 },\n        label: {\n          show: false\n        }\n      }\n    ]\n  };\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745567336591,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745568137376,
+    "i18nName": "出入库统"
+  },
+  {
+    "id": "a23867ce42b065d08f49124064e87839",
+    "resourceId": "component_1745458608776",
+    "name": "面积折现图",
+    "version": 0,
+    "thumbnailUrl": "年度报警.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']\n    },\n    {\n      label: 'xx',\n      value: [23, 35, 45, 60, 68, 45, 30, 40, 55, 70, 80, 75]\n    }\n  ]\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    xAxis: {\n      axisLabel: {\n        color: '#adb2b8',\n        fontSize: 12\n      },\n      axisLine: {\n        lineStyle: {\n          color: '#adb2b8'\n        }\n      },\n      splitLine: { show: false },\n      data: data[0].value\n    },\n    yAxis: {\n      splitLine: {\n        lineStyle: {\n          type: 'dashed', // 关键参数：虚线类型\n          color: '#adb2b8', // 保持与原设计一致的暗蓝色\n          opacity: 0.1,    // 适当降低透明度\n          dashOffset: 5    // 控制虚线间隔\n        }\n      },\n      name: '单位：吨',\n      nameLocation: 'end', // 名称显示在轴线末端\n      nameTextStyle: {\n        color: '#adb2b8', // 与坐标轴标签同色\n        fontSize: 12,\n        padding: [0, 0, 10, 0] // 微调位置 [上, 右, 下, 左]\n      },\n      type: 'value',\n      axisLabel: {\n        color: '#adb2b8',\n        fontSize: 12\n      },\n      axisLine: {\n        lineStyle: {\n          color: '#adb2b8'\n        }\n      }\n    },\n    series: [\n      {\n        data: data[1].value,\n        type: 'line',\n        smooth: true,\n        areaStyle: {\n          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [\n            { offset: 0, color: 'rgba(43, 124, 211, 0.6)' },\n            { offset: 1, color: 'rgba(43, 124, 211, 0.01)' }\n          ])\n        },\n        lineStyle: {\n          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [\n            { offset: 0, color: '#2B7CD3' },\n            { offset: 1, color: '#53A8FF' }\n          ]),\n          width: 3\n        },\n        emphasis: { // 禁用高亮状态变化\n          disabled: true\n        },\n        symbolSize: 8,\n        showSymbol: false,\n        itemStyle: {\n          color: '#adb2b8',\n          borderColor: '#adb2b8',\n          borderWidth: 2\n        },\n      }\n    ],\n    tooltip: {\n      alwaysShowContent: true,\n      transitionDuration: 0, // 禁用过渡动画\n      backgroundColor: 'rgba(255, 255, 255, 0.08)', // 更透明\n      // 使用阴影模拟毛玻璃边缘光晕\n      extraCssText: `\n    backdrop-filter: blur(18px);\n    box-shadow: 0 4px 20px rgba(0,0,0,0.15);\n    border-radius: 8px;\n  `,\n      textStyle: {\n        color: '#adb2b8',\n        fontSize: 14,\n        fontWeight: 'bold'\n      },\n      borderWidth: 0, // 去除边框\n      // 保持原有文字样式配置...\n      axisPointer: { // 指示线样式强化\n        lineStyle: {\n          color: '#adb2b8',\n          width: 1.5\n        }\n      },\n      trigger: 'axis',\n      formatter: (params) => {\n        const date = `${params[0].name}月`;\n        const value = params[0].value;\n        return `${date}<br>\n              <span style=\"color:#FFA940\">●</span> 报警数量     \n              <span style=\"color:#53A8FF\">${value}</span>`;\n      }\n    },\n  }\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745461487748,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745463940747,
+    "i18nName": "面积折现图"
+  },
+  {
+    "id": "fbc821d9b5a414f63b4fba454301c324",
+    "resourceId": "component_1745473167045",
+    "name": "横向柱状图",
+    "version": 0,
+    "thumbnailUrl": "设备维修进度.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'ab',\n      value: [90, 80, 70, 65, 60, 50]\n    },\n    {\n      label: 'xx',\n      value: ['门禁', '空调', '管道', '机箱', '排气', '烟感']\n    }\n  ]\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    grid: {\n      left: '20%',\n      right: '15%',\n      bottom: '10%',\n      containLabel: true\n    },\n    yAxis: {\n      inverse: true,\n      type: 'category',\n      data: data[1].value,\n      axisLabel: {\n        color: '#fff',\n        fontSize: 14,\n        margin: 20 // 调整标签间距\n      },\n      axisLine: { show: false },\n      axisTick: { show: false }\n    },\n    xAxis: {\n      type: 'value',\n      max: 100,\n      axisLabel: { show: false },\n      axisLine: { show: false },\n      splitLine: { show: false }\n    },\n    series: [\n      {\n        type: 'bar',\n        barGap: '-100%',\n        barWidth: 20,\n        itemStyle: {\n          color: 'rgba(255,255,255,0.1)'\n        },\n        label: {\n          show: true,\n          position: 'right',\n          color: '#fff',\n          fontSize: 14,\n          formatter: ({ dataIndex }) => data[0].value[dataIndex] + '%'\n        },\n        data: Array(data[0].value.length).fill(100) // 全长度背景\n      },\n      // 进度条（渐变蓝）\n      {\n        type: 'bar',\n        barWidth: 20,\n        itemStyle: {\n          color: (params) =>\n            new echarts.graphic.LinearGradient(0, 0, 1, 0, [\n              { offset: 0, color: '#34e3e6' }, // 左侧亮蓝\n              { offset: 1, color: '#236efe' } // 右侧深蓝\n            ])\n        },\n        data: data[0].value,\n        // 新增标记线配置\n        markLine: {\n          symbol: 'none', // 隐藏端点\n          lineStyle: {\n            color: '#fff',\n            height: 10,\n            type: 'solid'\n          },\n          data: data[0].value.map((value, index) => ({\n            // 动态生成标记线\n            xAxis: 80,\n            yAxis: 9,\n            label: { show: false },\n\n            lineStyle: {\n              width: 4, // 加宽线条模拟栏板\n              opacity: 0.8\n            }\n          }))\n        }\n      },\n      {\n        symbol: 'roundRect',\n        type: 'pictorialBar',\n        tooltip: {\n          show: false // 禁用 pictorialBar 系列的 tooltip\n        },\n        itemStyle: {\n          color: '#fff'\n        },\n        symbolPosition: 'end',\n        symbolSize: [4, 23],\n        symbolOffset: [4, 0],\n        data: data[0].value\n      }\n    ]\n  }\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745473187109,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745482120308,
+    "i18nName": "横向柱状图"
+  },
+  {
+    "id": "eadeb4f501222e5ee58f03025705d904",
+    "resourceId": "component_1745483186354",
+    "name": "折线柱状图-用电趋势",
+    "version": 0,
+    "thumbnailUrl": "用电趋势.png",
+    "provider": "system",
+    "type": {
+      "text": "组件",
+      "value": "component"
+    },
+    "group": "template_component_init",
+    "configuration": {
+      "componentType": "echarts",
+      "javaScript": "//示例\nfunction defaultFunc(_getflag, _setdata, echarts) {\n  //默认数据绑定格式；data里的每一项代表数据源字段绑定对象\n  //label代表显示的字段名，value代表绑定的字段值\n  let data = [\n    {\n      label: 'month',\n      value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\n    },\n    {\n      label: 'kwh',\n      value: [7000, 2000, 6000, 9000, 1000, 4000, 4567, 2346, 10000, 1200, 1300]\n    },\n    {\n      label: 'temp',\n      value: [12, 23, 33, 45, 56, 67, 72, 75, 81, 85, 87, 98]\n    }\n  ]\n  //获取data配置\n  if (_getflag === 'data') return data\n  //传入数据映射\n  if (_setdata) {\n    data = _setdata\n  }\n  //图表配置项\n  const option = {\n    // ========== 3. 图例配置 ==========\n    legend: {\n      textStyle: { color: '#fff' },\n      data: ['月度用电', '月增速']\n    },\n\n    // ========== 5. 双Y轴配置 ==========\n    yAxis: [\n      {\n        // 左侧用电量轴\n        type: 'value',\n        name: 'kwh',\n        nameLocation: 'end',\n        nameTextStyle: { color: '#999fa4', padding: [0, 0, 0, -66] },\n        axisLine: { lineStyle: { color: '#999fa4' } },\n        splitLine: {\n          lineStyle: {\n            color: '#999fa4',\n            type: 'dashed',\n            opacity: 0.5,\n            dashOffset: 1\n          }\n        },\n        min: 0,\n        max: 10000,\n        interval: 2000\n      },\n      {\n        // 右侧增速轴\n        type: 'value',\n        name: '%',\n        nameLocation: 'end',\n        nameTextStyle: { color: '#999fa4', padding: [0, 0, 0, 42] },\n        axisLine: { show: false },\n        splitLine: { show: false },\n        min: 0,\n        max: 100,\n        interval: 20\n      }\n    ],\n\n    // ========== 6. X轴配置 ==========\n    xAxis: {\n      type: 'category',\n      data: data[0].value,\n      axisLabel: { color: '#999fa4' },\n      axisLine: {\n        lineStyle: {\n          color: '#999fa4',\n          type: 'dashed',\n          opacity: 0.5,\n          dashOffset: 1\n        }\n      }\n    },\n\n    // ========== 7. 数据系列 ==========\n    series: [\n      {\n        // 柱状图（用电量）\n        name: '月度用电',\n        type: 'bar',\n        barWidth: 24,\n        itemStyle: {\n          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [\n            { offset: 1, color: '#2370fd' }, // 顶部深蓝\n            { offset: 0, color: '#34e4e6' } // 底部浅蓝\n          ])\n        },\n        data: data[1].value\n      },\n      {\n        // 折线图（增速）\n        name: '月增速',\n        type: 'line',\n        yAxisIndex: 1, // 绑定右侧Y轴\n        symbol: 'circle',\n        symbolSize: 10,\n        lineStyle: {\n          color: '#FFD700',\n          width: 3,\n          shadowColor: 'rgba(255,215,0,0.5)', // 光晕效果\n          shadowBlur: 10\n        },\n        itemStyle: {\n          color: '#FFD700',\n          borderColor: '#FFF',\n          borderWidth: 2\n        },\n        data: data[2].value\n      }\n    ]\n  }\n\n  return option\n}"
+    },
+    "options": {},
+    "creatorId": "1199596756811550720",
+    "createTime": 1745483230779,
+    "modifierId": "1199596756811550720",
+    "modifyTime": 1745485140415,
+    "i18nName": "折线柱状图-用电趋势"
+  }
+]
